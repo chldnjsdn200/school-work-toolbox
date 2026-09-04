@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>랜덤 모둠 편성</title>
+  <link rel="stylesheet" href="grouping.css" />
+</head>
+<body>
+  <main class="app student-app">
+    <header class="student-header">
+      <h1>랜덤 모둠 편성</h1>
+    </header>
+
+    <section class="student-stage" aria-label="모둠 편성">
+      <div id="waitingDeck" class="waiting-deck" aria-label="학생 번호 목록"></div>
+      <div id="groupGrid" class="group-grid" aria-label="모둠 결과"></div>
+
+      <div class="student-actions">
+        <button id="makeGroupsBtn" class="primary">모둠 만들기</button>
+        <button id="reshuffleBtn" class="secondary" disabled>다시 섞기</button>
+        <button id="printBtn" class="ghost" disabled>인쇄</button>
+        <button id="copyBtn" class="ghost" disabled>결과 복사</button>
+      </div>
+
+      <p id="message" class="message student-message" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <script src="grouping-core.js"></script>
+  <script src="grouping-student.js"></script>
+</body>
+</html>

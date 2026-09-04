@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>모둠 편성 교사용 설정</title>
+  <link rel="stylesheet" href="grouping.css" />
+</head>
+<body>
+  <main class="app teacher-app">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">교사용 설정</p>
+        <h1>모둠 편성 설정</h1>
+        <p class="sub">학생 화면에 보이지 않을 편성 조건을 번호 기준으로 저장합니다.</p>
+      </div>
+      <a class="secondary link-button" href="index.html">학생 화면 열기</a>
+    </section>
+
+    <section class="panel controls">
+      <h2>기본 설정</h2>
+      <div class="grid three">
+        <label>
+          학생 수
+          <input id="studentCount" type="number" min="1" max="60" value="27" />
+        </label>
+
+        <label>
+          모둠 수
+          <input id="groupCount" type="number" min="1" max="60" value="6" />
+        </label>
+
+        <label>
+          모둠당 인원 수
+          <input id="groupSize" type="number" min="1" max="60" value="5" />
+          <span class="hint">입력하면 모둠 수가 자동으로 계산됩니다.</span>
+        </label>
+      </div>
+    </section>
+
+    <section class="panel controls">
+      <h2>편성 조건</h2>
+      <div class="condition-grid">
+        <label>
+          같은 모둠 금지
+          <textarea id="separatePairs" rows="6" placeholder="예:
+5-12
+8-20
+3-7"></textarea>
+          <span class="hint">한 줄에 한 쌍씩 입력합니다.</span>
+        </label>
+
+        <label>
+          같은 모둠 우선
+          <textarea id="togetherPairs" rows="6" placeholder="예:
+1-9
+4-15"></textarea>
+          <span class="hint">가능한 같은 모둠에 배치할 학생 쌍입니다.</span>
+        </label>
+
+        <label>
+          특정 모둠 고정
+          <textarea id="fixedAssignments" rows="6" placeholder="예:
+2:1
+7:3"></textarea>
+          <span class="hint">학생번호:모둠번호 형식으로 입력합니다.</span>
+        </label>
+      </div>
+
+      <div class="actions">
+        <button id="saveBtn" class="primary">설정 저장</button>
+        <button id="resetBtn" class="ghost">설정 초기화</button>
+      </div>
+
+      <p id="message" class="message" aria-live="polite"></p>
+    </section>
+
+    <section class="panel summary-panel">
+      <h2>현재 저장된 설정</h2>
+      <dl id="summaryList" class="summary-list"></dl>
+    </section>
+  </main>
+
+  <script src="grouping-core.js"></script>
+  <script src="grouping-teacher.js"></script>
+</body>
+</html>
