@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>폴더 일괄 생성기</title>
+  <link rel="stylesheet" href="folder-generator.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <p class="eyebrow">범용 업무경감 도구</p>
+      <h1>폴더 일괄 생성기</h1>
+      <p class="sub">여러 폴더를 한 번에 만들어 반복 작업을 줄일 수 있습니다.</p>
+    </header>
+
+    <section class="panel">
+      <div class="step-title">
+        <span class="step-number">1</span>
+        <h2>생성 방식 선택</h2>
+      </div>
+
+      <div class="mode-tabs" role="tablist" aria-label="폴더 생성 방식">
+        <button id="simpleModeBtn" class="mode-tab active" type="button" data-mode="simple">직접 입력</button>
+        <button id="numberModeBtn" class="mode-tab" type="button" data-mode="number">번호 자동 생성</button>
+        <button id="treeModeBtn" class="mode-tab" type="button" data-mode="tree">계층형 폴더 만들기</button>
+      </div>
+
+      <label class="template-select">
+        빠른 템플릿
+        <select id="templateSelect">
+          <option value="">선택 안 함</option>
+          <option value="classes">학급 폴더</option>
+          <option value="grades">학년 폴더</option>
+          <option value="months">월별 폴더</option>
+          <option value="lessons">차시 폴더</option>
+          <option value="homeroom">학급 업무 기본 구조</option>
+        </select>
+      </label>
+    </section>
+
+    <section class="panel">
+      <div class="step-title">
+        <span class="step-number">2</span>
+        <h2>폴더 이름/범위 설정</h2>
+      </div>
+
+      <div id="simplePanel" class="mode-panel">
+        <label>
+          폴더명 목록
+          <textarea id="simpleInput" rows="8" placeholder="예:
+1반
+2반
+3반
+
+또는
+1반, 2반, 3반"></textarea>
+          <span class="hint">줄바꿈 또는 쉼표로 구분합니다.</span>
+        </label>
+      </div>
+
+      <div id="numberPanel" class="mode-panel hidden">
+        <div class="grid four">
+          <label>
+            접두어
+            <input id="numberPrefix" type="text" placeholder="예: 2026_" />
+          </label>
+          <label>
+            기본 이름
+            <input id="numberBase" type="text" value="반" />
+          </label>
+          <label>
+            접미어
+            <input id="numberSuffix" type="text" />
+          </label>
+          <label>
+            번호 자릿수
+            <input id="numberDigits" type="number" min="1" max="8" value="1" />
+          </label>
+        </div>
+
+        <div class="grid three">
+          <label>
+            시작 번호
+            <input id="startNumber" type="number" value="1" />
+          </label>
+          <label>
+            끝 번호
+            <input id="endNumber" type="number" value="12" />
+          </label>
+          <fieldset>
+            <legend>번호 위치</legend>
+            <label class="radio-row">
+              <input type="radio" name="numberPosition" value="before" checked />
+              앞
+            </label>
+            <label class="radio-row">
+              <input type="radio" name="numberPosition" value="after" />
+              뒤
+            </label>
+          </fieldset>
+        </div>
+      </div>
+
+      <div id="treePanel" class="mode-panel hidden">
+        <label>
+          계층형 폴더 경로
+          <textarea id="treeInput" rows="9" placeholder="예:
+2026학년도/1학년/1반
+2026학년도/1학년/2반
+2026학년도/2학년/1반"></textarea>
+          <span class="hint">경로 형식을 사용합니다. `/`는 하위 폴더 구분자로 처리합니다.</span>
+        </label>
+      </div>
+
+      <div class="toolbar">
+        <button id="resetBtn" class="ghost" type="button">초기화</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="step-title">
+        <span class="step-number">3</span>
+        <h2>미리보기</h2>
+      </div>
+
+      <p id="validationMessage" class="message" aria-live="polite"></p>
+      <div id="previewSummary" class="preview-summary"></div>
+      <div id="previewTree" class="preview-tree" aria-label="생성 예정 폴더"></div>
+    </section>
+
+    <section class="panel">
+      <div class="step-title">
+        <span class="step-number">4</span>
+        <h2>생성 위치 선택</h2>
+      </div>
+
+      <div class="actions">
+        <button id="pickDirectoryBtn" class="secondary" type="button">생성 위치 선택</button>
+        <button id="createFoldersBtn" class="primary" type="button" disabled>폴더 만들기</button>
+      </div>
+
+      <p id="directoryMessage" class="directory-message">아직 생성 위치를 선택하지 않았습니다.</p>
+      <div id="resultBox" class="result-box hidden"></div>
+    </section>
+
+    <footer class="privacy-note">
+      입력한 정보는 서버로 전송되지 않으며 현재 브라우저에서만 처리됩니다.<br />
+      폴더는 사용자가 직접 선택한 위치에만 생성됩니다.
+    </footer>
+  </main>
+
+  <script src="folder-generator-core.js"></script>
+  <script src="folder-generator-ui.js"></script>
+</body>
+</html>
