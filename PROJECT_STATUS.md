@@ -5,6 +5,7 @@ School Work Toolbox 프로젝트의 현재 개발 상태를 기록합니다.
 ## 1. 완료
 
 - PC 시리얼번호 자동 확인 BAT: 기존에 별도로 개발 완료
+- 조건부 랜덤 자리배치기 v1
 
 ## 2. 개발 중
 
@@ -12,7 +13,6 @@ School Work Toolbox 프로젝트의 현재 개발 상태를 기록합니다.
 
 ## 3. 개발 예정
 
-- 조건부 랜덤 자리배치기: 초기 버전 개발 예정
 - 모둠 편성 모듈: 미개발
 - 학급 운영 모듈: 미개발
 - 예산/행정 모듈: 미개발
@@ -23,6 +23,7 @@ School Work Toolbox 프로젝트의 현재 개발 상태를 기록합니다.
 
 ## 4. 최근 변경사항
 
+- 조건부 랜덤 자리배치기 v1 추가
 - 프로젝트 기본 폴더 구조 생성
 - README.md, PROJECT_STATUS.md, TODO.md, AGENTS.md, CLAUDE.md 기본 문서 작성
 - 순수 HTML/CSS/JavaScript 기반 정적 웹 프로젝트 방향 정리
