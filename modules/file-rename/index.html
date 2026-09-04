@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>파일명 일괄 변경기</title>
+  <link rel="stylesheet" href="file-rename.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <p class="eyebrow">범용 업무경감 도구</p>
+      <h1>파일명 일괄 변경기</h1>
+      <p class="sub">여러 파일의 이름을 한 번에 미리보고, 변경된 이름으로 새 파일을 만듭니다.</p>
+    </header>
+
+    <section class="panel step-panel">
+      <div class="step-title">
+        <span class="step-number">1</span>
+        <h2>파일 선택</h2>
+      </div>
+
+      <label class="file-drop">
+        <input id="fileInput" type="file" multiple />
+        <span>파일 여러 개 선택</span>
+        <small>선택한 파일의 이름과 확장자만 사용합니다.</small>
+      </label>
+
+      <div class="toolbar">
+        <p id="fileSummary" class="summary-text">선택된 파일이 없습니다.</p>
+        <button id="clearFilesBtn" class="ghost" type="button">선택 파일 초기화</button>
+      </div>
+
+      <div class="table-wrap compact-table">
+        <table>
+          <thead>
+            <tr>
+              <th>원본 파일명</th>
+              <th>확장자</th>
+            </tr>
+          </thead>
+          <tbody id="fileListBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel step-panel">
+      <div class="step-title">
+        <span class="step-number">2</span>
+        <h2>변경 규칙 설정</h2>
+      </div>
+
+      <div class="rule-grid">
+        <label>
+          접두어 추가
+          <input id="prefixInput" type="text" placeholder="예: 체육대회_" />
+        </label>
+
+        <label>
+          접미어 추가
+          <input id="suffixInput" type="text" placeholder="예: _보관" />
+        </label>
+
+        <label>
+          찾을 문자열
+          <input id="findInput" type="text" placeholder="예: 최종" />
+        </label>
+
+        <label>
+          바꿀 문자열
+          <input id="replaceInput" type="text" placeholder="예: 완료" />
+        </label>
+
+        <label>
+          제거할 문자열
+          <input id="removeInput" type="text" placeholder="예: 20260904_" />
+        </label>
+      </div>
+
+      <div class="numbering-box">
+        <label class="checkbox-row">
+          <input id="numberingEnabled" type="checkbox" />
+          <span>전체 파일명을 동일한 형식으로 변경하고 번호 자동 부여</span>
+        </label>
+
+        <div class="rule-grid numbering-grid">
+          <label>
+            공통 이름
+            <input id="numberingBaseInput" type="text" placeholder="예: 체육대회_" />
+          </label>
+
+          <label>
+            시작 번호
+            <input id="startNumberInput" type="number" min="0" value="1" />
+          </label>
+
+          <label>
+            번호 자릿수
+            <input id="numberDigitsInput" type="number" min="1" max="8" value="3" />
+          </label>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <button id="resetOptionsBtn" class="ghost" type="button">이름 변경 옵션 초기화</button>
+      </div>
+    </section>
+
+    <section class="panel step-panel">
+      <div class="step-title">
+        <span class="step-number">3</span>
+        <h2>변경 결과 미리보기</h2>
+      </div>
+
+      <p id="validationMessage" class="message" aria-live="polite"></p>
+
+      <div class="table-wrap preview-table">
+        <table>
+          <thead>
+            <tr>
+              <th>원본 파일명</th>
+              <th>변경 예정 파일명</th>
+              <th>확인</th>
+            </tr>
+          </thead>
+          <tbody id="previewBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel step-panel">
+      <div class="step-title">
+        <span class="step-number">4</span>
+        <h2>파일 생성</h2>
+      </div>
+
+      <div class="actions">
+        <button id="createFilesBtn" class="primary" type="button" disabled>변경된 파일 만들기</button>
+      </div>
+      <p class="hint">여러 파일은 브라우저 정책에 따라 다운로드 확인이 여러 번 표시될 수 있습니다.</p>
+    </section>
+
+    <footer class="privacy-note">
+      선택한 파일은 서버로 업로드되지 않으며 현재 브라우저에서만 처리됩니다.
+    </footer>
+  </main>
+
+  <script src="file-rename-core.js"></script>
+  <script src="file-rename-ui.js"></script>
+</body>
+</html>
