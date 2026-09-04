@@ -1,0 +1,56 @@
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# JetBrains
+.idea/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+~$*
+
+# Local environment files
+.env
+.env.*
+
+# Build and dependency folders
+node_modules/
+dist/
+build/
+out/
+.cache/
+
+# Archives and generated binaries
+*.zip
+*.7z
+*.rar
+*.exe
+*.msi
+
+# Office temporary files
+~*.docx
+~*.xlsx
+~*.pptx
+
+# Python cache, in case helper scripts are added later
+__pycache__/
+*.py[cod]
+
+# Keep source documents and static web files tracked:
+# .html, .css, .js, and .md files are intentionally not ignored.
