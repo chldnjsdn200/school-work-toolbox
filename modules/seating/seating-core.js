@@ -1,3 +1,23 @@
+const SEATING_STORAGE_KEY = "schoolWorkToolbox.seating.config.v1";
+
+const DEFAULT_SEATING_CONFIG = {
+  studentCount: 27,
+  cols: 6,
+  rows: 5,
+  frontPriority: [],
+  separatePairs: []
+};
+
+function getDefaultSeatingConfig() {
+  return {
+    studentCount: DEFAULT_SEATING_CONFIG.studentCount,
+    cols: DEFAULT_SEATING_CONFIG.cols,
+    rows: DEFAULT_SEATING_CONFIG.rows,
+    frontPriority: [],
+    separatePairs: []
+  };
+}
+
 function shuffle(array) {
   const copy = [...array];
   for (let i = copy.length - 1; i > 0; i--) {
@@ -44,6 +64,77 @@ function parsePairs(text) {
     .filter(Boolean)
     .map(line => line.split(/[-~,]/).map(v => Number(v.trim())))
     .filter(pair => pair.length === 2 && pair.every(Number.isInteger));
+}
+
+function uniqueValidNumbers(values) {
+  return [...new Set(
+    (Array.isArray(values) ? values : [])
+      .map(Number)
+      .filter(Number.isInteger)
+  )];
+}
+
+function normalizePairs(values) {
+  if (!Array.isArray(values)) return [];
+
+  return values
+    .map(pair => Array.isArray(pair) ? pair.map(Number) : [])
+    .filter(pair => pair.length === 2 && pair.every(Number.isInteger));
+}
+
+function normalizeSeatingConfig(config = {}) {
+  return {
+    studentCount: Number.isInteger(Number(config.studentCount))
+      ? Number(config.studentCount)
+      : DEFAULT_SEATING_CONFIG.studentCount,
+    cols: Number.isInteger(Number(config.cols))
+      ? Number(config.cols)
+      : DEFAULT_SEATING_CONFIG.cols,
+    rows: Number.isInteger(Number(config.rows))
+      ? Number(config.rows)
+      : DEFAULT_SEATING_CONFIG.rows,
+    frontPriority: uniqueValidNumbers(config.frontPriority),
+    separatePairs: normalizePairs(config.separatePairs)
+  };
+}
+
+function loadSeatingConfig() {
+  try {
+    const saved = window.localStorage.getItem(SEATING_STORAGE_KEY);
+    if (!saved) return getDefaultSeatingConfig();
+
+    const parsed = JSON.parse(saved);
+    const normalized = normalizeSeatingConfig(parsed);
+    return validateInputs(normalized) ? getDefaultSeatingConfig() : normalized;
+  } catch (_error) {
+    return getDefaultSeatingConfig();
+  }
+}
+
+function saveSeatingConfig(config) {
+  const normalized = normalizeSeatingConfig(config);
+  const error = validateInputs(normalized);
+
+  if (error) {
+    return { ok: false, error };
+  }
+
+  const data = {
+    version: 1,
+    ...normalized
+  };
+
+  window.localStorage.setItem(SEATING_STORAGE_KEY, JSON.stringify(data));
+
+  return {
+    ok: true,
+    config: normalized
+  };
+}
+
+function resetSeatingConfig() {
+  window.localStorage.removeItem(SEATING_STORAGE_KEY);
+  return getDefaultSeatingConfig();
 }
 
 function validateInputs({ studentCount, rows, cols, frontPriority, separatePairs }) {

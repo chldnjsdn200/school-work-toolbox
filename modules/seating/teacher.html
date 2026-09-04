@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>자리배치 교사용 설정</title>
+  <link rel="stylesheet" href="seating.css" />
+</head>
+<body>
+  <main class="app teacher-app">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">교사용 설정</p>
+        <h1>자리배치 설정</h1>
+        <p class="sub">학생 화면에 보이지 않을 조건을 번호 기준으로 저장합니다.</p>
+      </div>
+      <a class="secondary link-button" href="index.html">학생 화면 열기</a>
+    </section>
+
+    <section class="panel controls">
+      <div class="grid">
+        <label>
+          학생 수
+          <input id="studentCount" type="number" min="1" max="60" value="27" />
+        </label>
+
+        <label>
+          가로 좌석 수
+          <input id="cols" type="number" min="1" max="12" value="6" />
+        </label>
+
+        <label>
+          세로 좌석 수
+          <input id="rows" type="number" min="1" max="12" value="5" />
+        </label>
+      </div>
+
+      <div class="advanced teacher-conditions">
+        <label>
+          앞자리 우선 학생
+          <input id="frontPriority" type="text" placeholder="예: 3, 7, 12" />
+          <span class="hint">쉼표로 구분합니다. 앞 2줄 안에 우선 배치합니다.</span>
+        </label>
+
+        <label>
+          서로 떨어뜨릴 학생 쌍
+          <textarea id="separatePairs" rows="5" placeholder="예:
+5-12
+8-20
+3-7"></textarea>
+          <span class="hint">한 줄에 한 쌍씩 입력합니다. 좌우/앞뒤/대각선 인접을 피합니다.</span>
+        </label>
+      </div>
+
+      <div class="actions">
+        <button id="saveBtn" class="primary">설정 저장</button>
+        <button id="resetBtn" class="ghost">설정 초기화</button>
+      </div>
+
+      <p id="message" class="message" aria-live="polite"></p>
+    </section>
+
+    <section class="panel summary-panel">
+      <h2>현재 저장된 설정</h2>
+      <dl id="summaryList" class="summary-list"></dl>
+    </section>
+  </main>
+
+  <script src="seating-core.js"></script>
+  <script src="seating-teacher.js"></script>
+</body>
+</html>

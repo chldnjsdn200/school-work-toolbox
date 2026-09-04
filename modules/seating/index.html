@@ -3,81 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>조건부 랜덤 자리배치기</title>
+  <title>랜덤 자리배치</title>
   <link rel="stylesheet" href="seating.css" />
 </head>
 <body>
-  <main class="app">
-    <section class="hero">
-      <div>
-        <p class="eyebrow">교사 업무경감 도구</p>
-        <h1>조건부 랜덤 자리배치기</h1>
-        <p class="sub">교사가 지정한 조건은 반영하고, 나머지는 무작위로 배치함</p>
-      </div>
-      <button id="studentModeBtn" class="secondary">학생 화면</button>
-    </section>
+  <main class="app student-app">
+    <header class="student-header">
+      <h1>랜덤 자리배치</h1>
+    </header>
 
-    <section id="controlPanel" class="panel controls">
-      <div class="grid">
-        <label>
-          학생 수
-          <input id="studentCount" type="number" min="1" max="60" value="27" />
-        </label>
-
-        <label>
-          가로 좌석 수
-          <input id="cols" type="number" min="1" max="12" value="6" />
-        </label>
-
-        <label>
-          세로 좌석 수
-          <input id="rows" type="number" min="1" max="12" value="5" />
-        </label>
-      </div>
-
-      <details>
-        <summary>교사용 조건 설정</summary>
-
-        <div class="advanced">
-          <label>
-            앞자리 우선 학생
-            <input id="frontPriority" type="text" placeholder="예: 3, 7, 12" />
-            <span class="hint">쉼표로 구분 · 앞 2줄 안에 우선 배치</span>
-          </label>
-
-          <label>
-            서로 떨어뜨릴 학생
-            <textarea id="separatePairs" rows="4" placeholder="예:
-5-12
-8-20
-3-7"></textarea>
-            <span class="hint">한 줄에 한 쌍씩 입력 · 좌우/앞뒤/대각선 인접 금지</span>
-          </label>
-        </div>
-      </details>
-
-      <div class="actions">
-        <button id="generateBtn" class="primary">자리배치 만들기</button>
-        <button id="resetBtn" class="ghost">초기화</button>
-      </div>
-
-      <p id="message" class="message" aria-live="polite"></p>
-    </section>
-
-    <section class="panel result-panel">
+    <section class="panel result-panel student-result">
       <div class="board">교탁</div>
+      <div id="seatGrid" class="seat-grid student-seat-grid" aria-label="자리표"></div>
 
-      <div id="seatGrid" class="seat-grid" aria-label="자리배치 결과"></div>
-
-      <div class="result-actions">
-        <button id="reshuffleBtn" class="primary" disabled>다시 섞기</button>
-        <button id="printBtn" class="secondary" disabled>인쇄</button>
-        <button id="exitStudentModeBtn" class="secondary hidden">교사 화면으로</button>
+      <div class="student-actions">
+        <button id="shuffleBtn" class="primary">자리 섞기</button>
+        <button id="reshuffleBtn" class="secondary" disabled>다시 섞기</button>
       </div>
+
+      <p id="message" class="message student-message" aria-live="polite"></p>
     </section>
   </main>
 
   <script src="seating-core.js"></script>
-  <script src="seating-ui.js"></script>
+  <script src="seating-student.js"></script>
 </body>
 </html>

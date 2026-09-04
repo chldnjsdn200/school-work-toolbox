@@ -6,6 +6,7 @@
   --muted: #68758a;
   --accent: #3559e8;
   --accent-soft: #edf1ff;
+  --success: #127a4a;
   --danger: #b42318;
   --shadow: 0 12px 30px rgba(33, 47, 76, 0.08);
   font-family: Inter, Pretendard, "Noto Sans KR", system-ui, sans-serif;
@@ -23,12 +24,16 @@ button, input, textarea {
   font: inherit;
 }
 
-button {
+button, .link-button {
   cursor: pointer;
-  border-radius: 12px;
+  border-radius: 8px;
   border: 0;
   padding: 11px 16px;
   font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 button:disabled {
@@ -39,6 +44,10 @@ button:disabled {
 .app {
   width: min(1100px, calc(100% - 32px));
   margin: 32px auto 60px;
+}
+
+.student-app {
+  width: min(1180px, calc(100% - 28px));
 }
 
 .hero {
@@ -61,6 +70,11 @@ h1 {
   font-size: clamp(28px, 4vw, 42px);
 }
 
+h2 {
+  margin: 0 0 16px;
+  font-size: 22px;
+}
+
 .sub {
   margin: 10px 0 0;
   color: var(--muted);
@@ -69,7 +83,7 @@ h1 {
 .panel {
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: 8px;
   box-shadow: var(--shadow);
   padding: 22px;
   margin-bottom: 18px;
@@ -91,7 +105,7 @@ label {
 input, textarea {
   width: 100%;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 12px 13px;
   background: #fff;
   color: var(--text);
@@ -114,7 +128,7 @@ summary {
   font-weight: 800;
 }
 
-.advanced {
+.advanced, .teacher-conditions {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px;
@@ -152,8 +166,9 @@ summary {
 .message {
   min-height: 22px;
   margin: 12px 0 0;
-  color: var(--muted);
+  color: var(--success);
   font-size: 14px;
+  font-weight: 700;
 }
 
 .message.error {
@@ -165,7 +180,7 @@ summary {
   width: min(320px, 70%);
   margin: 0 auto 28px;
   padding: 12px;
-  border-radius: 12px;
+  border-radius: 8px;
   background: #242b38;
   color: white;
   text-align: center;
@@ -181,7 +196,7 @@ summary {
 .seat {
   min-height: 66px;
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -204,6 +219,80 @@ summary {
 
 .hidden {
   display: none !important;
+}
+
+.student-header {
+  display: flex;
+  justify-content: center;
+  margin: 24px 0 18px;
+  text-align: center;
+}
+
+.student-header h1 {
+  font-size: clamp(34px, 6vw, 64px);
+}
+
+.student-result {
+  border: 0;
+  box-shadow: none;
+  padding: 20px 0 0;
+}
+
+.student-result .board {
+  width: min(420px, 72%);
+  margin-bottom: 32px;
+  padding: 16px;
+  font-size: 22px;
+}
+
+.student-seat-grid {
+  gap: 12px;
+}
+
+.student-seat-grid .seat {
+  min-height: clamp(58px, 9vw, 96px);
+  font-size: clamp(18px, 3vw, 30px);
+}
+
+.student-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+.student-actions button {
+  min-width: 140px;
+  font-size: 18px;
+}
+
+.student-message {
+  text-align: center;
+  font-size: 18px;
+}
+
+.seat.spinning {
+  background: var(--accent-soft);
+  color: var(--accent);
+  transform: scale(.98);
+}
+
+.summary-list {
+  display: grid;
+  grid-template-columns: minmax(140px, 220px) 1fr;
+  gap: 12px 16px;
+  margin: 0;
+}
+
+.summary-list dt {
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.summary-list dd {
+  margin: 0;
+  font-weight: 700;
 }
 
 body.student-mode {
@@ -233,7 +322,7 @@ body.student-mode .seat {
 }
 
 @media (max-width: 760px) {
-  .grid, .advanced {
+  .grid, .advanced, .teacher-conditions, .summary-list {
     grid-template-columns: 1fr;
   }
 
@@ -248,6 +337,14 @@ body.student-mode .seat {
   .seat {
     min-height: 54px;
     font-size: 15px;
+  }
+
+  .student-actions button {
+    width: 100%;
+  }
+
+  .student-seat-grid {
+    gap: 8px;
   }
 }
 
