@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>목록 비교기</title>
+  <link rel="stylesheet" href="list-compare.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <p class="eyebrow">데이터 업무경감 도구</p>
+      <h1>목록 비교기</h1>
+      <p class="sub">두 목록의 공통값, 누락값, 중복값을 빠르게 확인합니다.</p>
+    </header>
+
+    <section class="panel">
+      <div class="step-title">
+        <span class="step-number">1</span>
+        <h2>목록 입력</h2>
+      </div>
+
+      <div class="mode-row">
+        <label>
+          빠른 모드
+          <select id="quickMode">
+            <option value="general">일반 목록 비교</option>
+            <option value="missing-submit">미제출자 찾기</option>
+            <option value="missing-value">누락값 찾기</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="input-grid">
+        <section class="input-card">
+          <div class="input-card-head">
+            <label for="listA" id="labelA">A 목록 - 기준 목록</label>
+            <label class="file-button">
+              TXT/CSV 불러오기
+              <input id="fileA" type="file" accept=".txt,.csv,text/plain,text/csv" />
+            </label>
+          </div>
+          <textarea id="listA" rows="13" placeholder="예:
+101
+102
+103
+105
+107"></textarea>
+        </section>
+
+        <section class="input-card">
+          <div class="input-card-head">
+            <label for="listB" id="labelB">B 목록 - 비교 목록</label>
+            <label class="file-button">
+              TXT/CSV 불러오기
+              <input id="fileB" type="file" accept=".txt,.csv,text/plain,text/csv" />
+            </label>
+          </div>
+          <textarea id="listB" rows="13" placeholder="예:
+101
+102
+104
+105
+106"></textarea>
+        </section>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="step-title">
+        <span class="step-number">2</span>
+        <h2>비교 옵션 선택</h2>
+      </div>
+
+      <div class="option-bar">
+        <label>
+          결과 정렬
+          <select id="sortMode">
+            <option value="input">입력 순서 유지</option>
+            <option value="text-asc">문자 오름차순</option>
+            <option value="text-desc">문자 내림차순</option>
+            <option value="number-asc">숫자 오름차순</option>
+            <option value="number-desc">숫자 내림차순</option>
+          </select>
+        </label>
+
+        <fieldset>
+          <legend>저장 형식</legend>
+          <label class="radio-row">
+            <input type="radio" name="saveFormat" value="xlsx" checked />
+            Excel (.xlsx)
+          </label>
+          <label class="radio-row">
+            <input type="radio" name="saveFormat" value="csv" />
+            CSV (.csv)
+          </label>
+        </fieldset>
+      </div>
+
+      <details class="advanced-options">
+        <summary>고급 설정</summary>
+        <div class="checkbox-grid">
+          <label class="checkbox-row">
+            <input id="trimWhitespace" type="checkbox" checked />
+            앞뒤 공백 무시
+          </label>
+          <label class="checkbox-row">
+            <input id="removeEmpty" type="checkbox" checked />
+            빈 줄 제거
+          </label>
+          <label class="checkbox-row">
+            <input id="ignoreCase" type="checkbox" checked />
+            대소문자 무시
+          </label>
+          <label class="checkbox-row">
+            <input id="ignoreAllWhitespace" type="checkbox" />
+            모든 공백 무시
+          </label>
+          <label class="checkbox-row">
+            <input id="numericCompare" type="checkbox" />
+            숫자 형식으로 비교
+          </label>
+          <label class="checkbox-row">
+            <input id="uniqueForCompare" type="checkbox" checked />
+            비교 시 중복값은 1개 값으로 처리
+          </label>
+        </div>
+      </details>
+
+      <div class="actions">
+        <button id="compareBtn" class="primary" type="button">목록 비교하기</button>
+        <button id="saveBtn" class="secondary" type="button" disabled>결과 저장</button>
+        <button id="resetBtn" class="ghost" type="button">전체 초기화</button>
+      </div>
+
+      <p id="message" class="message" aria-live="polite"></p>
+    </section>
+
+    <section id="resultSection" class="result-section hidden">
+      <div id="summaryGrid" class="summary-grid" aria-label="전체 요약"></div>
+      <div id="resultGrid" class="result-grid" aria-label="비교 결과"></div>
+    </section>
+
+    <footer class="privacy-note">
+      입력한 목록과 불러온 파일은 서버로 전송되지 않으며 현재 브라우저에서만 처리됩니다.<br />
+      개인정보가 포함된 자료는 학교의 개인정보 처리 기준에 따라 사용해주세요.
+    </footer>
+  </main>
+
+  <script src="../../shared/libs/xlsx.full.min.js"></script>
+  <script src="list-compare-core.js"></script>
+  <script src="list-compare-ui.js"></script>
+</body>
+</html>
